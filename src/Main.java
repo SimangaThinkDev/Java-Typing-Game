@@ -14,7 +14,12 @@ public class Main {
 
         // Logic for the main Thread
 
-        String[] difficultyLevels = { "easy", "hard" } ;
+        ArrayList<String> difficultyLevels = new ArrayList<>() ;
+
+        // Add Difficulty levels to arraylist
+        difficultyLevels.add( "easy" );
+        difficultyLevels.add( "medium" );
+        difficultyLevels.add( "hard" );
 
         System.out.println( "Please Choose Game difficulty" );
 
@@ -27,27 +32,43 @@ public class Main {
 
         }
         String response = scanner.nextLine();
-        ArrayList<String> words = new ArrayList<>();
-
+        ArrayList< String > words = new ArrayList<>();
         
-        if ( response.toLowerCase().equals( "easy" ) ) {
-            
-            File myObj = new File( "easy.txt" );
-            try ( Scanner myReader = new Scanner( myObj ) ){
-                
-                while ( myReader.hasNextLine() ) {
-                    words.add( myReader.nextLine() );
-                }
-                
-            }
-        }
+        
+        if ( difficultyLevels.contains(response.toLowerCase().strip()) ) {
 
+            words = getFile( response + ".txt" );
+            
+        } else {
+            System.out.println( "Bad Command" );
+            main(args); // Recall Main
+        }
+        
         for ( String word : words ) {
             System.out.println( word );
         }
-
+        
         scanner.close();
+        
+    }
 
+    public static ArrayList< String > getFile( String path ) throws FileNotFoundException {
+        
+        ArrayList<String> words = new ArrayList<>();
+        
+        File myObj = new File( "easy.txt" );
+        try ( Scanner myReader = new Scanner( myObj ) ){
+            
+            while ( myReader.hasNextLine() ) {
+                words.add( myReader.nextLine() );
+            }
+            
+        }
+        catch ( FileNotFoundException e ) {
+            throw new FileNotFoundException(" File Not found ");
+        }
+
+        return words;
     }
 
 }
