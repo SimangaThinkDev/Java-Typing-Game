@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -44,9 +45,21 @@ public class Main {
             main(args); // Recall Main
         }
         
-        for ( String word : words ) {
-            System.out.println( word );
-        }
+        // for ( String word : words ) {
+        //     System.out.println( word );
+        // }
+
+        /*
+         * Random generator = new Random();
+            int randomIndex = generator.nextInt(myArray.length);
+            return myArray[randomIndex];
+         */
+        Random generator = new Random();
+        int randomIndex = generator.nextInt( words.size() );
+
+        System.out.println( "Random word chose is: " + words.get(randomIndex) );
+
+        // TODO: implement logic to handle typing a word with the timer active concurrently
         
         scanner.close();
         
@@ -56,7 +69,7 @@ public class Main {
         
         ArrayList<String> words = new ArrayList<>();
         
-        File myObj = new File( "easy.txt" );
+        File myObj = new File( path );
         try ( Scanner myReader = new Scanner( myObj ) ){
             
             while ( myReader.hasNextLine() ) {
