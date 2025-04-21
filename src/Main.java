@@ -56,10 +56,26 @@ public class Main {
          */
         Random generator = new Random();
         int randomIndex = generator.nextInt( words.size() );
+        String randomWord = words.get(randomIndex);
 
-        System.out.println( "Random word chose is: " + words.get(randomIndex) );
+        System.out.println( "The word is: " + randomWord );
 
         // TODO: implement logic to handle typing a word with the timer active concurrently
+        MyRunnable timer = new MyRunnable( 3 );
+        Thread r = new Thread( timer );
+        r.setDaemon(true);
+        r.start();
+        response = scanner.nextLine();
+
+        if ( response.strip().toLowerCase().equals( randomWord.toLowerCase().strip() ) ) {
+
+            System.out.println( "Correct!!" );
+
+        } else {
+
+            System.out.println( "That was incorrect!!" );
+
+        }
         
         scanner.close();
         
