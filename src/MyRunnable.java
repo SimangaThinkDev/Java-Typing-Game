@@ -19,7 +19,7 @@ public class MyRunnable implements Runnable {
 
         }
         System.out.println( "Time's out\n Re Run the program to try again" );
-        // System.exit( 0 );
+        System.exit( 0 );
 
 
     }
